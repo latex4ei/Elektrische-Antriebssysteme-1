@@ -1,0 +1,482 @@
+\documentclass[fs, german]{latex4ei_fs}
+\usepackage[european]{circuitikz}
+\begin{document}
+\fstitle{Elektrische Antriebssysteme I} 
+
+\section{Allgemeines}
+\begin{sectionbox}
+	\subsection{Einheiten}
+	\begin{tabular}{llll} \ctrule
+		\textbf{Größe} & \textbf{Definition} & \textbf{Einheit} & \textbf{SI-Notation} \\ \cmrule
+		%Geschwindigkeit & $\vec{v}=\frac{\mathrm d \vec{s}}{\mathrm dt}$ & $\frac{m}{s}$ & \\
+		%Beschleunigung & $\vec{a}=\frac{\mathrm d \vec{v}}{\mathrm dt}$ & $\frac{m}{s^2}$ & \\
+		Frequenz & $f = \frac{c}{\lambda}$ & Hertz & $\si{\hertz} = \si{ \per \second}$\\
+		Kraft & $ \vec F := m \cdot \vec a $ & Newton & $\si{\newton} = \si{\kilogram \meter \per \second \squared}$\\
+		Druck & $p := \frac{\vec F_\perp}{A}$ & Pascal & $\si{\pascal} = \si{\newton \per \meter \squared} = \si{\kilogram \per \meter \second \squared}$\\
+		${}^{\textstyle \text{Arbeit,}}_{\textstyle \text{Energie}}$ & $W := \int \vec F \diff \vec s$ & Joule & $\si{\joule} = \si{\newton\meter} = \si{\kilogram\meter \squared \per \second \squared}$ \\
+		Leistung & $P := \frac{\mathrm dW}{\mathrm dt}$ & Watt & $\si{\watt} = \si{\joule \per \second} = \si{\kilogram\meter \squared \per \second \cubed}$\\
+		%Impuls & $\vec p := m \cdot \vec v$ & $\frac{kg\; m}{s}$ & \\
+		Spannung & $U := \frac{W}{Q}$ & Volt & $\si{\volt} = \si{\watt \per \ampere} = \si{\kilogram\meter  \squared \per \ampere\second \cubed}$\\
+		Ladung & $Q:= \int I \diff t$ & Coulomb & $\si{\coulomb} = \si{\ampere\second}$\\
+		Resistivität & $R := \frac{\diff U}{\diff I}$ & Ohm & $\si{\ohm} = \si{\volt \per \ampere} = \si{\kilogram\meter  \squared \per \ampere  \squared\second \cubed}$\\
+		Kapazität & $C:= \frac{\diff Q}{\diff U}$ & Farad & $\si{\farad} = \si{\coulomb \per \volt} = \si{\ampere  \squared  \second \tothe{4}\per \kilogram\meter \squared}$\\	
+		Induktivität & $L := \frac{\diff \Phi}{\diff I}$ & Henry & $\si{\henry} = \si{\volt\second \per\ampere} = \si{\kilogram\meter  \squared \per \ampere  \squared \second  \squared}$\\
+		${}^{\text{Magnetischer}}_{\textstyle \text{Fluss}}$ & $\Phi_{\ir M} := \int \vec B \diff \vec A$ & Weber & $\si{\weber} = \si{\volt\second} = \si{\kilogram\meter \squared \per \ampere\second \squared}$\\[0.2em]
+		${}^{\text{Magnetische}}_{\textstyle \text{Flussdichte}}$ & $\vec B := \mu_0 \vec H$ & Tesla & $\si{\tesla} = \si{\weber \per \meter  \squared} = \si{\kilogram \per \ampere\second \squared}$\\
+\end{tabular}
+\end{sectionbox}
+\begin{sectionbox}
+	\subsection{Newtonsche Mechanik $\vec F=m \vec a $}
+	\begin{tabular}{ccc} \ctrule
+				& \large Translation & {\large Rotation} (Radius $r$) \\ \cmrule
+		Strecke/Winkel & \large $\vec x$ & \large $\vec \varphi =  \frac{\vec x}{r}$\\[0.2em]
+		Geschwindigkeit & \large $\vec v = \dot{\vec x}$ & \large $\vec \omega = \dot{\vec \varphi} = \frac{\vec v}{r}$ \\[0.2em]
+		Beschleunigung & \large $\vec a = \dot{\vec v} = \ddot{\vec x}$ & \large $\vec \alpha = \dot{\vec \omega} = \ddot{\vec \varphi} = \frac{\vec a}{r}$ \\[0.2em]
+		Masse/Trägh. & \large $m$ & \large $\Theta = \int_V \vec r^2_\perp \diff m$ \\[0.2em]
+		Impuls/Drall & \large $\vec p =m \vec v$ & \large $\vec L = \ma \Theta \vec \omega = \vec r \times \vec p$ \\[0.2em]
+		Kraft/Moment & \large $\vec F = \dot{\vec p} = m \vec a$ &  \large $\vec M = \dot{\vec L} = \ma \Theta \vec \alpha = \vec r \times \vec F$ \\[0.2em]
+		Energie & \large $E_{\ir kin}=\frac12mv^2$ & \large $E_{\ir rot}=\frac12 \Theta \omega ^2$\\[0.2em]
+		Leistung & \large $P = \vec F \bdot \vec v$ & \large $P = \vec M \bdot \vec \omega$\\ \cbrule
+	\end{tabular}
+\end{sectionbox}
+\begin{sectionbox}
+	\subsection{Elektrische Felder}
+
+	\subsubsection*{Maxwellsche Gleichungen (Naturgesetze)}
+	\begin{tabular}{ll}
+		Gaußsches Gesetz: & Faradaysches ind. Gesetz\\
+		\large $\div \vec D = \varrho $ & \large $\rot \vec E + \frac{\partial \vec B}{\partial t} = 0$ \\[1em]
+		Quellfreiheit des magn. Feldes & Ampèrsches Gesetz\\
+		\large $\div \vec B = 0$ & \large $\rot \vec H = \vec j + \frac{\partial \vec D}{\partial t}$\\[0.3em]
+	\end{tabular} 
+
+	\begin{tabular}{lll} \ctrule
+		\textbf{Resistiv} & \textbf{Kapazitiv} & \textbf{Induktiv}\\ \cmrule
+		\large $\mathrm d I = G \diff U$ & \large $\mathrm d Q = C \diff U$ & \large $\mathrm d \Phi_M = L \diff I$\\[0.3em] 
+		\large $\vec j = \sigma \vec E$ & \large $\vec D = \varepsilon \vec E$ & \large $\vec B = \mu \vec H$\\ [0.3em] 
+		\large $\mathrm d I = \vec j \diff A$ & \large $\mathrm d U = \vec E \diff \vec r$ & \large $\mathrm d \Phi_M = \vec B \diff A$\\[0.3em]  
+		\large $\vec j = q n \vec v$ & \large $Q(V) \equiv \oiint\limits_{\partial V}\! \vec D \diff \vec A\;$ & \large $I(A) \equiv \oint\limits_{\partial A}\! \vec H \diff\vec r$\\ \noalign{\vspace{2pt}}\cmrule
+		Widerst. $R = \rho \frac{l}{A}$ & Kondensator $C=\varepsilon \frac{A}{d}$ & Spule $L=\mu A \frac{N^2}{l}$\\
+		\cbrule
+	\end{tabular}
+
+\end{sectionbox}	
+\section{Gleichstrommaschine}
+
+\begin{sectionbox}
+
+\subsection*{Elektrisch}
+
+Ankerkreis: $U_a = U_i + R_a I_a + L_a \frac \diff I_a \diff t$ \\
+Erregerkreis: $U_e = R_e I_e + L_e \frac{\diff I_e}{\diff t}$
+
+\subsection*{Mechanisch}
+$M_{\ir el} = M_{\ir Welle} + M_R + J \frac{\diff \omega_m}{\diff t}$
+
+\subsection*{Kopplung}
+$U_i = c \Phi \omega_m$ \\
+$M_{\ir el} = c \Phi I_a$ \quad mit $c$: Maschinenkonstante
+
+Erregerfluss: $\Phi = \frac{L_e}{N_e} I_e$ \quad mit $N_e$: Windungszahl
+
+
+\subsection*{Wirkungsgrad}
+$\eta = \frac{P_m}{P_e} = \frac{M \omega_m}{U_a I_a + U_e I_e}$
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsection{Fremderregte Maschine}
+
+\subsubsection*{Stationärer Betrieb}
+$\omega_m =  \frac{U_a - R_a I_a}{c \Phi} $ \\
+$M_{\ir el} = c \cdot \Phi \cdot I_a$ \\
+
+$\omega_m = \frac{U_a}{c \Phi} - \frac{R_a}{(c \Phi)^2} M_{\ir el}  $
+\subsubsection*{Leerlauf}
+ $M = 0 \Ra I_a = 0 \Ra U_a = U_i$ \\
+ mechanische Kreisfrequenz: $\omega_{m0} = \frac{U_a}{c \Phi}$
+
+ Leerlaufdrehzahl: $n_0 = \omega_{m0} \cdot \frac{60}{2 \pi}$ (U/min)
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Nebenschlussmaschine}
+
+$\Phi = \frac{L_e}{N_e} \cdot I_e = \frac{L_e}{N_e} \cdot \frac{U_a}{R_e + R_V}$
+
+Leerlaufdrehzahl: $w_{m0} = \frac{U_a}{c \Phi} = \frac{N_e (R_e + R_V)}{c \cdot L_e}$
+
+Drehzahlabhänigkeit:\\ $w_m = \frac{N_e (R_e + R_V)}{c \cdot L_e} - \frac{R_a (R_e + R_V)^2 \cdot N_e^2}{(c \cdot L_e \cdot U_a)^2} \cdot M_{\ir el}$
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Seriemaschine}
+
+$I_e$ = $I_a$ = $I$
+
+$\Phi = \frac{L_e}{N_e} \cdot I_e = \frac{L_e}{N_e} \cdot I_a$
+
+$\omega_m = \frac{U- (R_a + R_e) I_a}{c \frac{L_e}{N_e} I_a}$
+
+Drehmoment: $M = c \frac{L_e}{N_e} I_a^2 $
+
+Ohne Last: $I_a \ra 0 \Ra \omega_m \ra \infty$
+\end{sectionbox}
+
+\section{Universalmotor}
+Gleichstrommaschine: Aber geblecht (wegen magnetischen Streufeldern)
+
+
+Erregerspannung: $\vec U_e = \vec I \cdot R_e + \j \omega L_e \vec I$
+
+Ankerspannung: $\vec U_a = \vec I \cdot R_a + \j \omega L_a \vec I$
+
+$\vec U_i = c \vec \Phi_{\ir de} \omega_m$ \\
+
+
+$\vec U = \vec U_i + \vec I (R_a + R_e) + \j \omega \vec I (L_a + L_e)$
+
+$M_{\ir el} = c \Phi_{\ir de} I = c \frac{L_e}{N_e} I^2$
+
+Drehzahlabhängigkeit:
+
+$\omega_m = \frac{U- (R_a + R_e) \vec I - \j \omega (L_a + L_e) \vec I}{\sqrt{c \frac{L_e}{N_e}M_{\ir el}}}$ \\
+$\omega_m \propto \frac{U_i}{\sqrt{M_{\ir el}}}$
+
+Typische Auslegungen der Laufzeiten: Bohrmaschine ($50 \si{\hour}$)
+
+\section{Drehfeldmaschinen}
+
+
+\section{Synchronmaschine}
+
+\begin{sectionbox}
+
+Polpaarzahl: $\omega_{\ir mech} = \frac{\omega_1}{p}$ \quad $M = p \cdot M_{p}$ 
+
+mit $M_p$: Drehmoment pro Polpaar
+
+Polradspannung $\vec U_p = \j \omega_1 \vec \Psi_p$: \\
+
+ $\abs{\vec U_p} = \omega_1 \abs{\vec \Psi_p}$\\
+
+
+ $\vec U_1 = \vec U_p + \Delta \vec U$
+ $\Delta \vec U = \j X_d \cdot \vec I_1 (+ R \cdot \vec I_1)$ \\
+
+
+
+Leistung:
+
+ $P = \Re{\vec S}  = \Re{ 3 \vec U \vec I^* } = \Re{3( U_d + \j U_q ) (I_d - \j I_q)}$ \\ $= 3 (U_d I_d + U_q I_q)$ \\
+
+ d := direct (in Flussrichtung)
+
+ $U_{1q} = \abs{\vec U_1} \cos \theta$
+
+ $U_{1d} = - \abs{\vec U_1} \sin \theta$
+\subsection{Schenkelpolmaschine}
+
+Statorspannung:
+
+$\vec U_1 = \vec I_1 R_1 + U_{xd} + \j U_{xq} + \j U_P = \vec I_1 R_1 - \omega_1 L_q I_q + \j \omega_1 L_d I_d + \j U_P$
+
+Stromkomponenten:
+
+$I_{1d} = \frac{U_1 X_q \cos \theta - U_1 R_1 \sin \theta - U_P X_q}{R_1^2 + X_d X_q}$
+
+$I_{1q} = \frac{U_1 \sin \theta + R_1 I_{1d}}{X_q} = \frac{U_1 R_1 \cos \theta + U_1 X_d \sin \theta - U_P R_1}{R_1^2 + X_d X_q}$ 
+
+Leistung:
+ $P_m = M \omega_{\ir mech}$
+
+Moment: 
+
+$M = \frac{3 U_1 U_P}{\omega_{\ir mech} X_d} \sin (\theta ) + \frac{3 U_1^2}{2 \omega_{\ir mech}} (\frac{1}{X_q} - \frac{1}{X_d} ) \sin ( 2 \theta )$
+
+ \subsection{Vollpolmaschine}
+
+Statorspannung:
+$\vec U_1 = \vec I_1 (R_1 + \j \omega_1 L_d) + \j U_P$
+
+Leistung:
+ $P_m = M \omega_{\ir mech}$
+
+Moment: 
+$M = \frac{3 U_1 U_P}{\omega_{\ir mech} X_d} \sin ( \theta ) $
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Raumzeigerdarstellung}
+Statorspannung:\\
+$U_d = R_1 I_d + \frac{\diff \Psi_d}{\diff t} - p \omega_{\ir mech} \Psi_q$\\
+$U_q = R_1 I_q + \frac{\diff \Psi_q}{\diff t} + p \omega_{\ir mech} \Psi_d$
+
+Statorfluss: \\
+$\Psi_d = L_d I_d + L_{dE} I_E + L_{dD} I_D$ \\
+$\Psi_q = L_q I_q +  L_{qQ} I_Q$
+
+
+Dämpferspannung:
+
+$0 = R_D I_D + \frac{\diff \Psi_D}{\diff t}$ \\
+$0 = R_Q I_Q + \frac{\diff \Psi_Q}{\diff t}$
+
+Dämpferfluss:
+
+$\Psi_D = L_{dD} I_d + L_{ED} I_E + L_D I_D$ \\
+$\Psi_Q = L_{qQ} I_q + L_{Q} I_{Q}$
+
+Erregerspannung:
+$U_E = R_E I_E + \frac{\diff \Psi_E}{\diff t}$
+
+Erregerfluss:
+$\Psi_E = L_{dE} I_d + L_E I_E + L_{ED} I_D$
+
+Drehmoment:
+
+$M = \frac{3 p}{2} (I_q \Psi_d - I_d \Psi_q)$
+
+Drehzahl:
+
+$\omega_{\ir mech} = \frac{1}{J} \int (M- M_{\ir Last}) \diff t$
+
+ 
+ \end{sectionbox} 
+
+ \section{Asynchronmaschine}
+
+ \begin{sectionbox}
+\ctikzset{bipoles/length=3em}
+ \begin{circuitikz}[scale = 0.8] \draw
+ (0,0) to[short, o-, i=$I_1$] (1,0) to[R, l=$R_1$] (2,0) to [L, l=$L_{\sigma 1}$] (3,0) -- (3,0)
+ (3,0) to[L, l=$L'_{\sigma2}$] (4,0) to[R, l=$R'_2$] (5,0) to[R, l=$R'_S$] (6,0) to[short, i<=$I'_2$, , -o] (7,0 )
+ (3,0) -- (3, -0.6) -- (2.5, -0.6) to[L, l=$L_h$] (2.5, -2.3) --  (3, -2.3)
+ (3, -0.6) -- (3.5, -0.6) to[R, l=$R_{\ir Fe}$] (3.5, -2.3) --  (3, -2.3) -- (3, -3)
+ (0,-3) to[short, o-o] (7,-3)
+ (0,0) to[open, v=$U_1$] (0,-3)
+ (7,0) to[open, v^=$U'_2 / s$] (7,-3)
+  (2,0) to[open, v=$U_{h1} $] (2,-3)
+   (4.3,0) to[open, v^=$U'_{h2}$] (4.3,-3);
+ \end{circuitikz}
+ Drehfeld der Satorwicklung: $\omega_{D1} = \frac{\omega_{1}}{p}$
+
+ Drehfeld des Rotors: $\omega_{D2} = \omega_{D1} - \omega_{\ir mech}$
+
+$\omega_2 = p \cdot \omega_{D2}$
+
+Schlupf: $s = \frac{n_{\ir syn} - n}{n_{\ir syn}} = \frac{\omega_1 - p \cdot \omega_{\ir mech}}{\omega_1} = \frac{\omega_2}{\omega_1}$ 
+
+ \subsection{Leerlauf}
+  $\omega_{D2} = 0 \ra \omega_{\ir mech} = \omega_{\ir syn} = \omega_{D1} = \omega_1 /p $ 
+
+  Im Leerlauf ist der Schlupf 0 $s = 0$
+
+  \subsection{Rotierendes Koordinatensystem}
+
+Statorspannungsgleichung:
+
+  $\vec u_1 = R_1 \vec i_1 + \frac{\diff \vec \Psi_1}{\diff t} + \j \omega_K \vec \Psi_1$
+
+Rotorspannungsgleichung:
+
+  $\vec u_2 = R_2 \vec i_2 + \frac{\diff \vec \Psi_2}{\diff t} + \j (\omega_K - p \omega_{\ir mech} ) \vec \Psi_2$
+
+
+Statorfluss:
+
+  $\Psi_1 = L_1 \vec i_1 + L_h \vec i_2$
+
+Rotorfluss:
+
+  $\Psi_2 = L_2 \vec i_2 + L_h \vec i_1$
+
+Drehmoment:
+
+  $M = \frac{3 p}{2} \Im{\vec \Psi_1^* \vec i_1} = \frac{3p}{2} \frac{L_h}{L_2} \Im{\vec \Psi_1^* \vec i_1}$ \\$ =  \frac{3p}{2} \frac{L_h}{L_1} \Im{\vec \Psi_1^* \vec i_2} $
+
+  $\omega_{\ir mech} = \frac{1}{J} \int (M - M_{\ir Last}) \diff t$
+ \end{sectionbox}
+
+ \section{Umrichter}
+
+ \begin{sectionbox}
+ \subsection{B2}
+$U_{\ir di0} = \frac{1}{T} \int \limits_0^T u_d \cdot \diff t = \frac{1}{\pi} \int \limits_0^\pi u_d \cdot \diff (\omega t) = \frac{2 \sqrt 2}{\pi} U_N = 0.900 U_N$
+ 
+\subsubsection{Gesteuert}
+Mittelwert der Ausgangsspannung in Abhängigkeit des Zündwinkels $\alpha$:
+
+$U_{\ir di \alpha} = \frac{1}{\pi} \int \limits_\alpha^{\alpha + \pi} u_d \cdot \diff (\omega t) = U_{di 0} \cdot \cos \alpha$ 
+ \subsection{B6}
+ Idealisierte DC-Spannung (Mittelwert): 
+
+$U_{\ir di0} = \frac{3 \sqrt 2}{\pi} \cdot U_N = 1.35 U_N$
+
+Effektivwert des Netzstromes:
+
+$i_{N, \ir eff} = \sqrt{\frac{2}{3}} I_d $
+
+Halbleiterstrom:
+
+Effektivwert: $i_{\ir HL, eff} = \sqrt{\frac{1}{3}} I_d$
+
+Mittelwert: $i_{\ir HL,  avg} = \frac{1}{3} I_d$
+
+\subsubsection{Gesteuert}
+
+$U_{\ir di \alpha} = U_{\ir di0} \cdot \cos \alpha$
+
+Leistungsfaktor: $\lambda = 0.955 \cdot \cos \alpha$
+ \end{sectionbox}
+
+ \section{Halbleiter}
+\begin{sectionbox}
+
+ \begin{tablebox}{lll}
+ & $25 \si{\celsius} (\text{ca. } 300 \si{\kelvin})$ & $125 \si{\celsius} (
+ \text{ca.  } 400 \si{\kelvin})$ \\ 
+\cmrule
+ $n_{io}$ & $1.5 \cdot 10^{10} \si{1\per \centi \meter^3}$ & $10^{13} \si{1 \per \centi \meter^3}$ \\
+ $\rho$ & $2.5 \cdot 10^5 \si{\ohm \centi \meter}$ &$3.5 \cdot 10^2 \si{\ohm \centi \meter}$
+ \end{tablebox}
+\begin{symbolbox}
+\begin{tabular}{cc}
+$n_{io}$ & Dichte der freien Elektronen im Leitungsband \\
+$p_{io}$ & Dichte der freien Löcher im Valenzband \\
+$k$ & Boltzmann Konstante \\
+$E_{\ir Fi}$ & Fermi-Niveau (Energieniveau mit $W_{\ir FD} (E_{\ir Fi})= 0.5$)
+\end{tabular}
+\end{symbolbox}
+
+Fermi-Dirac Funktion:
+
+$W_{\ir FD} (E) = \frac{1}{1 + \exp\left(\frac{E-E_{\ir Fi}}{k \cdot T}\right)}$
+
+gibt die Besetzungswahrscheinlichkeit eines Energiezustandes im idealen Elektronengas an.
+
+Bewegungsgleichung für Elektronen:
+
+$m \cdot \left(\frac{\diff v}{\diff t} + \omega_0 \cdot v \right) = F_A = - e_0 \cdot E$
+\begin{symbolbox}
+\begin{tabular}{cc}
+$m$ & effektive Masse \\
+$\omega_0$ & Reibungskoeffizient \\
+$v$ & Driftgeschwindigkeit \\
+$F_A$ & Äussere Kraft \\
+$e_0$ & Ladung \\
+$E$ & Elektrische Feldstärke
+\end{tabular}
+\end{symbolbox}
+
+Stationäre Geschwindigkeit der Ladungsträger:
+$v = - \frac{e_0}{m \cdot \omega_0} \cdot E = \mu \cdot E$
+
+Elektrische Leitfähigkeit:
+$\sigma = e_0 (n \mu_n + p \mu_p)$
+
+\begin{symbolbox}
+\begin{tabular}{cc}
+$n$ & Konzentration der freien Elektronen \\
+$p$ & Konzentration der freien Löcher \\
+$\mu_n$ & Beweglichkeit der freien Elektronen \\
+$\mu_p$ & Beweglichkeit der freien Löcher \\
+$n_i$ & Intrinsische Ladungsträgerdichte
+ \end{tabular}
+\end{symbolbox}
+
+Ladungsträgerdichte im intrinsischen Halbleiter:
+ $n_i^2 = n \cdot p$
+\end{sectionbox}
+\begin{sectionbox}
+ \subsection{n-Dotierung}
+ Dotierung mit Donatoren (Elektronen) $\Ra$ Elektronenleitung \\
+
+Anhebung des Ferminiveaus $\Ra$ mehr Ladungsträger im Leitungsband
+
+Dichte der freien Elektronen: $n_{n0} = p_{n0} + N_D^+$ \\
+mit $p_{n0}$ verursacht durch Eigenleitung \\
+
+Dichte der freien Löcher: $p_{n0} \approx \frac{n_i^2}{N_D^+}$
+
+Elektrische Leitfähigkeit: $\sigma = e_0 \cdot N_D^+ \cdot \mu_n$
+\end{sectionbox}
+\begin{sectionbox}
+
+ \subsection{p-Dotierung}
+Dotierung mit Akzeptoren (Löchern) $\Ra$ Löcherleitung \\
+
+Absenkung des Ferminiveaus $\Ra$ mehr Ladungsträger im Valenzband
+
+Dichte der freien Elektronen: $p_{p0} = n_{p0} + N_A^-$ \\
+mit $n_{p0}$ verursacht durch Eigenleitung \\
+
+Dichte der freien Löcher: $n_{p0} \approx \frac{n_i^2}{N_A^-}$
+
+Elektrische Leitfähigkeit: $\sigma = e_0 \cdot N_A^- \cdot \mu_p$
+
+\end{sectionbox}
+\begin{sectionbox}
+
+\subsection{pn-Übergang}
+
+Diffusionsgleichungen: \\
+$i_{n, \ir Diff} = \epsilon_0 \cdot D_n \cdot \frac{\diff n}{\diff x}$\\
+$i_{p, \ir Diff} = \epsilon_0 \cdot D_p \cdot \frac{\diff p}{\diff x}$
+
+Diffusionskonstanten: 
+$D_n = \mu_n \frac{k \cdot T}{\epsilon_0}$ \quad $D_p = \mu_p \frac{k \cdot T}{\epsilon_0}$
+
+Poissongleichung: \\
+ $\frac{\diff^2 V}{\diff x^2} = - \frac{\diff E}{\diff x} = - \frac{\rho}{\epsilon} = \frac{e_0}{\epsilon} \cdot \left[ n(x) - p(x)  N_D^+ (x) + N_A^- (x) \right]$
+
+ Stromdichte-Gleichgewicht: \\
+ $i_p (x) = e_0 \cdot \mu_p \cdot p \cdot E - \epsilon_0 \cdot D_p \cdot \frac{\diff p}{\diff x}$ \\
+  $i_n (x) = e_0 \cdot \mu_n \cdot n \cdot E - \epsilon_0 \cdot D_n \cdot \frac{\diff n}{\diff x}$
+\end{sectionbox}
+
+\section{Leistungshalbleiter}
+
+\begin{sectionbox}
+\subsection{Diode}
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsection{Thyristor}
+\includegraphics[width=\columnwidth]{Thyristor.pdf}
+
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsection{IGCT (Integrated Gate Commutated Thyristor)}
+\subsubsection*{Aufbau}
+\includegraphics[width=\columnwidth]{IGCT.pdf}
+
+\subsubsection*{Ansteuerung}
+\includegraphics[width=0.7\columnwidth]{IGCT_Ansteuer.pdf}
+
+\subsubsection*{Ersatzmodell}
+\includegraphics[width=0.7\columnwidth]{IGCT-Ersatz.pdf}
+
+\includegraphics[width=0.7\columnwidth]{IGCT_Turnoff.pdf}
+
+\includegraphics[width=0.7\columnwidth]{IGCT-TO-Snubber.pdf}
+
+
+
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsection{IGBT}
+\subsubsection*{Aufbau}
+\includegraphics[width=\columnwidth]{IGBT.pdf}
+
+\subsubsection*{Ansteuerung}
+\includegraphics[width=\columnwidth]{IGBT_Ansteuer.pdf}
+
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsection{Pulswechselumrichter}
+\includegraphics[width=\columnwidth]{U-Umrichter.pdf}
+
+\end{sectionbox}
+
+\end{document}
