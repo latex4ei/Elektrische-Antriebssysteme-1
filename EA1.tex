@@ -1,5 +1,6 @@
 \documentclass[fs, german]{latex4ei_fs}
 \usepackage[european]{circuitikz}
+\usepackage{pbox}
 \begin{document}
 \fstitle{Elektrische Antriebssysteme I} 
 
@@ -500,6 +501,109 @@ $U_{LL_v} = \frac{\sqrt 6}{\pi} \frac{U_d}{v}$ für $v = 6n \pm 1 (n = 1, 2, 3, 
 \section{U/f Steuerung}
 
 \section{Auslegung von Regelkreisen}
+\begin{sectionbox}
+Offener Regelkreis: $\vec G_0 (s) = \frac{y(s)}{u(s)} = \vec G_{S1} (s) \cdot \vec G_{S2} (s)$
+
+Offener korrigierter Regelkreis: $\vec G_K (s) = \frac{y(s)}{e(s)} = \vec G_R (s) \cdot \vec G_0 (s)$
+
+\subsection{Stabilität}
+
+\subsubsection{Nyquist Ortskurve}
+	
+	die Nyquist Ortskurve ist die Frequenzgangortskurve des offenen Regelkreises $G_o (s)$ 
+	
+	\subsubsection{Nyquist Kriterium}
+	
+	Betrachtet Nyquist-Ortskurve und Pole $p_{\ir links}, p_{\ir rechts}, p_{\ir auf}$ im Bezug auf die Imaginärachse.
+	Das System ist stabil falls die OK nicht durch $-1 + \j 0$ verläuft und die Phasenänderung \\
+	
+	\begin{emphbox}
+	$W_{\ir ist} = \mathop{\Delta}\limits_{\omega = 0}^{\omega \ra \infty} \Phi$
+	\end{emphbox}
+	
+	von $-1 + \j 0$ aus gesehen gleich \\
+	
+		\begin{emphbox}
+		$W_{\ir soll} = \pi p_{\ir rechts} + \frac{\pi}{2} p_{\ir auf}$
+		\end{emphbox}
+	ist; also $W_{\ir soll} \stackrel{!}{=} W_{\ir ist}$ 
+\end{sectionbox}
+
+\begin{sectionbox}
+
+\subsection{Stationäre Genauigkeit} 
+
+Im stationären Betrieb soll der Regelfehler sehr klein werden:
+$e (t \ra \infty) = 0$
+
+Im Frequenzbereich:
+$e (t \ra \infty) = \lim \limits_{s \ra 0} s \cdot e(s) = \frac{1}{1 + \vec G_K (0)}$
+\end{sectionbox}
+
+
+\subsection{Frequenzgangfunktion  $G(\j \omega)$}
+Beschreibt die Auswirkungen von sinusförmigen Anregungen auf die Systemantwort.
+
+Die Auswirkungen auf Amplitude $A$ und Phasenverschiebung $\varphi$ ergeben die Frequenzgangfunktion $G(\j \omega)$
+
+	\begin{emphbox}
+	$G(\j \omega) = A(\omega) e^{\j \varphi (\omega)} = \Re {G(\j \omega)} + \j \Im{G(\j \omega)}$ 
+	\end{emphbox}
+	\pbox{4cm}{ \includegraphics{./img/OK_GO.pdf} } \quad
+	\pbox{4cm}{
+		\emph{Einschwingzeit:} $T_{\ir Ein} \approx \frac{3}{\omega_{\ir D1}}$\\
+		\\
+		Stabilitätskriterien mit Totzeit:\\
+		geschl. RK ist E/A \textbf{stabil} falls:\\
+		Phasenrad $\Phi_{\ir R} > 0$\\
+		Amplitudenrand $A_{\ir R} > 1$\\
+		\\
+		$\Psi_{\ir R} \approx 30^\circ \Leftrightarrow $ gutes Störverhalten\\
+		$\Psi_{\ir R} \approx 60^\circ \Leftrightarrow $ gutes Folgeverhalten
+	}
+
+	\begin{tabular}{@{}ll@{}}
+	\textbf{Kenngrößen:} & Bodediagramm:\\ \mrule
+		Amplituden-Durchtrittsfrequenz $\omega_{D1}$: & $A(\omega_{D1}) = 1$\\
+		Phasen-Durchtrittsfrequenz $\omega_{D2}$ & $\varphi (\omega_{D2}) = - \pi = -180^\circ$\\
+		Phasenrand/Phasenreserve $\Psi_R$: & $\Psi_R = \varphi (\omega_{D1}) + \pi$\\
+		Amplitudenrand/-reserve $A_R$ $(= K_{\ir krit})$ & $\frac{1}{A_R} = A (\omega_{D2})$
+	\end{tabular}
+
+\subsection{P-Regler}
+$\vec G_R (s) = \vec G_P (s) = K_R$
+
+Design: Ändere die Durchtrittsfrequenz $\omega_D$ durch ändern von $K_R$ so, dass der gewünschte Phasenrand entsteht. \\
+
+Für eine Strecke mit Tiefpasscharakteristik und 2 Zeitkonstanten:
+
+$\varphi_{VZ1} = - \arctan (\omega T_{S2})$ \\
+$\omega_D = \frac{1}{T_{S2}} \cdot \tan (\frac{\pi}{2} - \varphi_R)$
+
+$\Ra K_R = \frac{\omega_D T_{S1}}{K_S}$
+
+\subsection{PI-Regler}
+
+$\vec G_R (s) = \vec G_{PI} (s) = K_R \cdot \frac{1 + s T_R}{s T_R}$  
+
+Phasendrehung durch Integrator wird für hohe Frequenzen kompensiert.
+
+Knickfrequenz $T_R$ und Verstärkung $K_R$ können unabhänig voneinander eingestellt werden. \\
+
+Für eine Strecke mit Tiefpasscharakteristik und 2 Zeitkonstanten:
+
+Setze die Zeitkonstante $T_R$ auf die grösste Zeitkonstante der Strecke:
+$T_R = T_{S1}$. Stelle die Phasenreserve über $K_R$ ein (vgl. P-Regler).
+
+\subsection{PID-Regler}
+
+$\vec G_{PID} (s) = K_R \cdot \frac{1 + s T_{R1}}{s T_{R1}} \cdot \frac{1 + s T_{RD1}}{1 + s T_{RD2}}$ mit $T_{RD1} > T_{RD2}$ 
+
+Phasenanhebende Funktion kann die Phasenreserve erhöhen.
+
+Verhältnis der Knickfrequenzen: $k_{12} = \frac{T_{RD1}}{T_{RD2}}$
+
+Maximaler Phasenwinkel: $\varphi_{\ir max} = \arctan (\sqrt{ k_{12}}) - \arctan (\frac{1}{\sqrt{k_{12}}})$
 
 \section{Modellierung der Asynchronmaschine}
 
