@@ -2,7 +2,7 @@
 \usepackage[european]{circuitikz}
 \usepackage{pbox}
 \begin{document}
-\fstitle{Elektrische Antriebssysteme I} 
+\title{Elektrische Antriebssysteme I} 
 
 \section{Allgemeines}
 \begin{sectionbox}
@@ -60,8 +60,19 @@
 		Widerst. $R = \rho \frac{l}{A}$ & Kondensator $C=\varepsilon \frac{A}{d}$ & Spule $L=\mu A \frac{N^2}{l}$\\
 		\cbrule
 	\end{tabular}
-
 \end{sectionbox}	
+\begin{sectionbox}
+\subsection{Komplexe Zahlen $\cx z \in \C = \R^2$}
+\pbox{3cm}{ \includegraphics{./img/trigo.pdf} } \quad
+\pbox{6cm}{ 
+	$\cx z = \underset{\text{Karthesisch}}{a + b\i} = \underset{\text{Polarkoord.}}{r \cdot e^{\i \varphi}}$ \quad\ \boxed{ \underset{\text{Imaginäre Einheit}}{\i = \sqrt{-1}}}\\[0.4em] 
+	$\i^{2n} = -1^n$ \quad\ $\i^{2n+1} = -\i^n$ \quad\ $\i^{-1} = -\i$ \\[0.2em] 
+	$\ol{\cx z} = a - b\i$ \qquad $\cx z \ol{\cx z} = \abs{\cx z}^2 = a^2+b^2$\\[0.2em]
+	$\cx z_1 \cdot \cx z_2 = r_1 \cdot r_2 \cdot e^{\i (\varphi_1 + \varphi_2)}$\\[0.2em]
+	$z^{-1} = \frac{\ol{\cx z}}{\ol{\cx z} \cx z}=\frac{\ol{\cx z}}{a^2+b^2}$ }
+
+
+\end{sectionbox}
 \section{Gleichstrommaschine}
 
 \begin{sectionbox}
@@ -123,6 +134,8 @@ Ohne Last: $I_a \ra 0 \Ra \omega_m \ra \infty$
 \end{sectionbox}
 
 \section{Universalmotor}
+
+\begin{sectionbox}
 Gleichstrommaschine: Aber geblecht (wegen magnetischen Streufeldern)
 
 
@@ -143,7 +156,7 @@ $\omega_m = \frac{U- (R_a + R_e) \vec I - \j \omega (L_a + L_e) \vec I}{\sqrt{c 
 $\omega_m \propto \frac{U_i}{\sqrt{M_{\ir el}}}$
 
 Typische Auslegungen der Laufzeiten: Bohrmaschine ($50 \si{\hour}$)
-
+\end{sectionbox}
 \section{Drehfeldmaschinen}
 
 
@@ -243,7 +256,7 @@ $\omega_{\ir mech} = \frac{1}{J} \int (M- M_{\ir Last}) \diff t$
  \end{sectionbox} 
 
  \section{Asynchronmaschine}
-
+\label{sec:async}
  \begin{sectionbox}
 \ctikzset{bipoles/length=3em}
  \begin{circuitikz}[scale = 0.8] \draw
@@ -433,6 +446,10 @@ Poissongleichung: \\
   $i_n (x) = e_0 \cdot \mu_n \cdot n \cdot E - \epsilon_0 \cdot D_n \cdot \frac{\diff n}{\diff x}$
 \end{sectionbox}
 
+\begin{sectionbox}
+\subsection{Technologiekurve}
+\end{sectionbox}
+
 \section{Leistungshalbleiter}
 
 \begin{sectionbox}
@@ -464,13 +481,40 @@ Poissongleichung: \\
 
 \end{sectionbox}
 
-\begin{sectionbox}
 \subsection{IGBT}
+
+\begin{sectionbox}
+
+\subsubsection*{Schaltsymbol}
+\begin{center}
+\includegraphics[width=0.2\columnwidth]{IGBT_Schaltsymbol.pdf}
+
+\end{center}
+\end{sectionbox}
+\begin{sectionbox}
+
+
 \subsubsection*{Aufbau}
 \includegraphics[width=\columnwidth]{IGBT.pdf}
-
+\end{sectionbox}
+\begin{sectionbox}
 \subsubsection*{Ansteuerung}
 \includegraphics[width=\columnwidth]{IGBT_Ansteuer.pdf}
+
+
+Zusätzlich:
+\begin{itemize}
+	\item Speisungsteil
+	\item potentialgetrennte Ansteuerung (ggf. Optisch)
+	\item Gateschutzbeschaltung (hochohmiges $R_{GE}$)
+	\item $V_{CE \ir sat}$ Überwachung
+	\item Soft shutdown Funktion (im Kurzschlussfall)
+\end{itemize}
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsubsection*{Phasenbaustein eines (allgemeinen) Umrichters}
+\includegraphics[width=\columnwidth]{Phasenbaustein.pdf}
 
 \end{sectionbox}
 
@@ -528,7 +572,24 @@ Offener korrigierter Regelkreis: $\vec G_K (s) = \frac{y(s)}{e(s)} = \vec G_R (s
 		\end{emphbox}
 	ist; also $W_{\ir soll} \stackrel{!}{=} W_{\ir ist}$ 
 \end{sectionbox}
+\begin{sectionbox}
+\subsection{Betragsoptimum}
+$K_R = \frac{T_{S1}}{2 K_S T_{S \sum}}$
 
+$T_R = T_{S1}$
+
+Zeitkonstante des Reglers kompensiert die grösste Zeitkonstante der Strecke.
+
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Symmetrisches Optimum}
+$K_R = \frac{T_{S1}}{2 K_S T_{S \sum}}$
+
+$T_R = 4 \cdot T_{S \sum}$
+
+Zeitkonstante des Reglers kompensiert die Summe der kurzen Zeitkonstanten.
+
+\end{sectionbox}
 \begin{sectionbox}
 
 \subsection{Stationäre Genauigkeit} 
@@ -540,7 +601,7 @@ Im Frequenzbereich:
 $e (t \ra \infty) = \lim \limits_{s \ra 0} s \cdot e(s) = \frac{1}{1 + \vec G_K (0)}$
 \end{sectionbox}
 
-
+\begin{sectionbox}
 \subsection{Frequenzgangfunktion  $G(\j \omega)$}
 Beschreibt die Auswirkungen von sinusförmigen Anregungen auf die Systemantwort.
 
@@ -569,7 +630,8 @@ Die Auswirkungen auf Amplitude $A$ und Phasenverschiebung $\varphi$ ergeben die 
 		Phasenrand/Phasenreserve $\Psi_R$: & $\Psi_R = \varphi (\omega_{D1}) + \pi$\\
 		Amplitudenrand/-reserve $A_R$ $(= K_{\ir krit})$ & $\frac{1}{A_R} = A (\omega_{D2})$
 	\end{tabular}
-
+\end{sectionbox}
+\begin{sectionbox}
 \subsection{P-Regler}
 $\vec G_R (s) = \vec G_P (s) = K_R$
 
@@ -581,7 +643,8 @@ $\varphi_{VZ1} = - \arctan (\omega T_{S2})$ \\
 $\omega_D = \frac{1}{T_{S2}} \cdot \tan (\frac{\pi}{2} - \varphi_R)$
 
 $\Ra K_R = \frac{\omega_D T_{S1}}{K_S}$
-
+\end{sectionbox}
+\begin{sectionbox}
 \subsection{PI-Regler}
 
 $\vec G_R (s) = \vec G_{PI} (s) = K_R \cdot \frac{1 + s T_R}{s T_R}$  
@@ -595,6 +658,9 @@ Für eine Strecke mit Tiefpasscharakteristik und 2 Zeitkonstanten:
 Setze die Zeitkonstante $T_R$ auf die grösste Zeitkonstante der Strecke:
 $T_R = T_{S1}$. Stelle die Phasenreserve über $K_R$ ein (vgl. P-Regler).
 
+\end{sectionbox}
+\begin{sectionbox}
+
 \subsection{PID-Regler}
 
 $\vec G_{PID} (s) = K_R \cdot \frac{1 + s T_{R1}}{s T_{R1}} \cdot \frac{1 + s T_{RD1}}{1 + s T_{RD2}}$ mit $T_{RD1} > T_{RD2}$ 
@@ -605,11 +671,213 @@ Verhältnis der Knickfrequenzen: $k_{12} = \frac{T_{RD1}}{T_{RD2}}$
 
 Maximaler Phasenwinkel: $\varphi_{\ir max} = \arctan (\sqrt{ k_{12}}) - \arctan (\frac{1}{\sqrt{k_{12}}})$
 
+\end{sectionbox}
+
 \section{Modellierung der Asynchronmaschine}
+
+\begin{sectionbox}
+Gleichungen der Asynchronmaschine siehe Kapitel \ref{sec:async}.
+
+Streukoeffizient: $\sigma = 1 - \frac{L_m^2}{L_1 L_2}$
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsection{Bezugsgrössen}
+
+Spannung: $\hat U_N = \sqrt{\frac{2}{3}} U_{\ir nom, rms} $
+
+
+Strom: $\hat I_N = \sqrt 2 I_{\ir nom, rms}$
+
+Frequenz: $\omega_N = 2\pi f_{\ir nom}$
+
+Scheinleistung: $S_N = \frac{3}{2} U_N I_N$
+
+Wirkleistung: $P_N = S_N \cdot \cos(\varphi_{\ir nom})$
+
+Fluss: $\Psi_N = \frac{U_N}{I_N}$
+
+Drehmoment: $M_N = \frac{S_N}{\Omega_N} = \frac{3 p }{2} \cdot \Psi_N \cdot I_N$
+
+Impedanz: $Z_N = \frac{U_N}{I_N}$
+
+Kapazität:$ C_N = \frac{1}{\omega_N Z_N}$
+
+Mechanische Drehzahl: $\Omega_N = \frac{\omega_N}{p}$ \\
+
+Per-Unit System:
+$x_{\ir p.u.} = \frac{X_{S1}}{X_N}$
+\end{sectionbox}
+
+
+\begin{sectionbox}
+\subsection{Statorfestes Koordinatensystem}
+
+$\vec u_1^0 = r_1 \vec i_1^0 + \frac{1}{\omega_N} \cdot \frac{\diff \vec \Psi_1^0}{\diff t}$
+
+$\vec u_2^0 = 0 = r_2 \vec i_2^0 + \frac{1}{\omega_N} \cdot \frac{\diff \vec \Psi_2^0}{\diff t} - \j n \vec \Psi_2^0$
+
+Da $r_2 \vec i_2^0$ klein:
+
+$\frac{\diff \vec \Psi_2^0}{\diff t} = \j n \omega_N \cdot \vec \Psi_2^0 \Ra \vec \Psi_2^0 = \vec{\hat \Psi_2^0} \cdot \e^{\j n \omega_N t}$
+
+$\vec i_2 = \frac{1}{x_m} (\vec \Psi_1 - x_1 \vec i_1)$
+
+$\vec \Psi_2 = \frac{x_2}{x_m} (\vec \Psi_1 - \sigma x_1 \vec i_1)$ mit $\sigma = 1 - \frac{x_m^2}{x_1 x_2}$
+
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Rotorflussorientiertes Koordinatensystem}
+
+$\vec u_2^R = 0 = r_2 \vec i_2^R + \frac{1}{\omega_N} \cdot \frac{\diff \Psi_2^R}{\diff t} + \j (f_1^R - n) \vec \Psi_2^R$
+
+$\vec i_2 = \frac{1}{x_2} (\vec \Psi_2 - x_m \vec i_1)$
+
+$\frac{\diff \vec \Psi_2^R}{\diff t} = (- \frac{1}{T_2} - \j f_2^R \omega_N) \cdot \vec \Psi_2^R + \frac{1}{T_2} x_m \vec i_1^R$ 
+
+Rotorzeitkonstante: $T_2 = \frac{L_2}{R_2} = \frac{x_2}{\omega_N r_2}$
+
+Rotorfrequenz (Schlupffrequenz): $f_2^R = f_1^R - n$
+
+Da $d$-Achse in Richtung des Rotorflusszeigers $\vec \Psi_2$ orientiert:
+
+$\vec \Psi_2^R = \Psi_{2d}^R = \Psi_2$
+
+$\Ra \frac{\diff \Psi_2}{\diff t} = - \frac{1}{T_2} \Psi_2 + \frac{1}{T_2} \cdot x_m i_{1d}^R$
+\end{sectionbox}
+
 
 \section{Rotorflussorientierte Regelung} 
 
+\begin{sectionbox}
+
+\subsection{Direkte Rotorflussorientierung} 
+
+\includegraphics[width=\columnwidth]{direktRFORegelung.pdf}
+
+
+$i_{1d \ir soll} = \frac{1}{x_{m} \Psi_{2\ir soll}}$
+\end{sectionbox}
+
+\begin{sectionbox}
+
+\subsection{Phase-Locked Loop (PLL)} 
+
+Ziel: Finden des Transformationswinkels in das d-q Koordinatensystems
+\includegraphics[width=\columnwidth]{PLL.pdf}
+\end{sectionbox}
+\begin{sectionbox}
+
+\subsection{Indirekte Rotorflussorientierung} 
+\includegraphics[width=\columnwidth]{indirektRFORegelung.pdf}
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Stromregelung}
+\includegraphics[width=\columnwidth]{iregelung.pdf}
+
+Verzögerungszeit des Modulators: $T_{t, \ir mod} = \frac{1}{4 \cdot f_{\ir carrier}}$ (Unterschwingungsverfahren)
+
+Übertragungsfunktion: $\frac{u_{1d'}^R}{u_{1d \ir soll'}^R} = e^{- s T_{t \ir mod}} \approx \frac{1}{1 + s T_{t \ir mod}}$\\
+(da Totzeit $\ll$ Zeitkonstanten des Regelkreises)
+
+\subsubsection*{Strecke} $\frac{i_{1d}^R}{u_{1d'}^R} = \frac{1 / r_e}{1 + s \frac{\sigma x_1}{\omega_N r_e}} = \frac{k_c}{1 + sT_c}$ mit $k_c = \frac{1}{r_e}$, $T_c = \frac{\sigma x_1}{\omega_N r_e}$
+
+\subsubsection*{Messeinrichtung}
+$\frac{i_{1 \ir dist}^R}{i_{1d}^R} = \frac{1}{(1 + s T_{fc})} e^{-s T_{tc}} \approx \frac{1}{(1 + s T_{fc}) (1 + s T_{tc})}$ 
+
+\subsubsection*{Regler}
+
+$T_{Rc} = T_c  = \frac{\sigma x_1}{\omega_N r_e}$ (Betragsoptimum)
+
+$K_{Rc} = \frac{T_c}{2 k_c T_{\Sigma c}} = \frac{\sigma x_1}{2 \omega_N T_{\Sigma c}}$ 
+
+\subsubsection*{Entkopplung}
+
+$u_{1d}^R = u_{1d}^{R'} - \sigma x_1 f_1^R i_{1q}^R - \frac{1}{\omega_N T_2} \cdot \frac{x_m}{x_2} \Psi_2$
+
+$u_{1q}^R = u_{1q}^{R '} + \sigma x_1 f_1^R i_{1d}^R + n \cdot \frac{x_m}{x_2} \Psi_2$ 
+
+\subsubsection*{Begrenzung}
+
+$i_{1q \ir max} = \sqrt{i_{1\ir max}^2 - i_{1d \ir ist}^2} $ 
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Flussregelung}
+\includegraphics[width=\columnwidth]{Flussregelung.pdf}
+
+\subsubsection*{Strecke}
+
+$\frac{\Psi_2}{i_{1d}^R} = \frac{x_m}{1 + s T_2}$
+
+\subsubsection*{Stromregelkreis}
+
+$\frac{i_{1 \ir dist}^R}{i_{1d \ir soll}^R} = \frac{1}{1 + s T_{ccl}}$
+
+\subsubsection*{Flussregler}
+$T_{\Sigma \Psi} = T_{ccl} + T_{\ir beob}$   
+
+$T_{R \Psi} = 4 T_{\Sigma \Psi}$ (Symmetrisches Optimum)
+
+$K_{R \Psi} = \frac{T_2}{2 x_m T_{\Sigma \Psi}}$
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Drehzahlregelung}
+\includegraphics[width=\columnwidth]{Drehzahlregelung.pdf}
+
+\subsubsection*{Strecke}
+
+$T_M = \frac{J_{\ir sum} \cdot \Omega_N}{M_N}$ mit $\Omega_N = \frac{\omega_N}{p}$
+
+$\frac{\diff n}{\diff t} = \frac{1}{T_M} \cdot (m_{\ir Mot} - m_{\ir Last})$
+
+$\frac{m_{\ir ist}}{m_{\ir soll}} = \frac{i_{q \ir ist}}{i_{q \ir soll}} = \frac{1}{1 + s T_{ccl}}$ mit $T_{ccl} = 2 T_{\Sigma c}$ des Stromregelkreises
+
+\subsubsection*{Messeinrichtung} 
+
+Drehzahlgeber oder Drehzahlbeobachter. Tiefpassfilter gegen Störungen, Abtastung u. Rechenzeit ($\ra$ Totzeit)
+
+\subsubsection*{Reglerauslegung}
+
+\emph{Strecke:} \\
+$T_{n \Sigma} = T_{ccl} + T_{fn} + T_{ta} + T_{tr}$
+
+$\vec G_o = \frac{1}{s T_M ( 1+ s T_{n \Sigma})}$ 
+
+\paragraph*{P-Regler}
+
+Führungsverhalten: $\frac{n_{\ir ist}}{n_{\ir soll}} = \frac{1}{1 + s \frac{T_M}{K_R} + s^2 \frac{T_M T_{n \Sigma}}{K_R}}$
+
+Störverhalten: $\frac{n_{\ir ist}}{m_{\ir Last}} = \frac{1}{K_R} \cdot \frac{1 + s T_{n \Sigma}}{1 + s \frac{T_M}{K_R} + s^2 \frac{T_M T_{n \Sigma}}{K_R}}$
+
+$\Ra $ Ungeeignet da schlechtes Störverhalten.
+
+$\Ra$ PI-Regler vorteilhaft
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Positionsregelung}
+$\omega_{Dn} = \frac{1}{2 T_{n \Sigma}}$
+
+\end{sectionbox}
+
+
+\begin{sectionbox}
+\subsection{Feldschwächung}    
+\end{sectionbox}
 \section{Direct Torque Control} 
+\begin{sectionbox}
+\includegraphics[width=\columnwidth]{DTC.pdf}
+
+
+Regelung des Drehmoments und des Flusses direkt durch den Schaltzustand (Raumzeiger) des Umrichters.
+
+Bestimme zu jedem Zeitpunkt den Spannungsvektor der Statorfluss und Drehmoment in gewünschter Richtung beeinflusst. \\
+
+
+Änderung der Flussamplitude: $\frac{\diff \vec \Psi_1}{\diff t} = \omega_N \cdot (\vec u_1 - r_1 \cdot \vec i_1)$
+
+Änderung des Drehmoments: $m_e = \frac{x_m}{\sigma x_1 x_2} \cdot \abs{\vec \Psi_1} \cdot \abs{\vec \Psi_2} \sin \alpha$ \\
+$\ra $ Regelung des Drehmoments durch den Winkel des Statorflusszeigers.
+\end{sectionbox}
 
 \section{Flussschätzung} 
 
