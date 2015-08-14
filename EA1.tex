@@ -1,13 +1,23 @@
-\documentclass[fs, german]{latex4ei_fs}
+\documentclass[german]{latex4ei_fs}
 \usepackage[european]{circuitikz}
+\author{Martin Zellner}
+\myemail{zellnerm@ethz.ch}			% optional, delete if unchanged
+	\fancyfoot[L]{ \EngGer{Please report mistakes \emph{immediately}}{Fehler bitte \emph{sofort} melden}.}
+
+	\renewcommand{\fstitle}[1]{
+		\vspace{-20mm}{
+		
+			\huge\textbf{#1}
+		}
+	}
 \usepackage{pbox}
 \begin{document}
-\title{Elektrische Antriebssysteme I} 
+\fstitle{Elektrische Antriebssysteme I} 
 
 \section{Allgemeines}
 \begin{sectionbox}
 	\subsection{Einheiten}
-	\begin{tabular}{llll} \ctrule
+	\begin{tablebox}{llll} 
 		\textbf{Größe} & \textbf{Definition} & \textbf{Einheit} & \textbf{SI-Notation} \\ \cmrule
 		%Geschwindigkeit & $\vec{v}=\frac{\mathrm d \vec{s}}{\mathrm dt}$ & $\frac{m}{s}$ & \\
 		%Beschleunigung & $\vec{a}=\frac{\mathrm d \vec{v}}{\mathrm dt}$ & $\frac{m}{s^2}$ & \\
@@ -24,11 +34,11 @@
 		Induktivität & $L := \frac{\diff \Phi}{\diff I}$ & Henry & $\si{\henry} = \si{\volt\second \per\ampere} = \si{\kilogram\meter  \squared \per \ampere  \squared \second  \squared}$\\
 		${}^{\text{Magnetischer}}_{\textstyle \text{Fluss}}$ & $\Phi_{\ir M} := \int \vec B \diff \vec A$ & Weber & $\si{\weber} = \si{\volt\second} = \si{\kilogram\meter \squared \per \ampere\second \squared}$\\[0.2em]
 		${}^{\text{Magnetische}}_{\textstyle \text{Flussdichte}}$ & $\vec B := \mu_0 \vec H$ & Tesla & $\si{\tesla} = \si{\weber \per \meter  \squared} = \si{\kilogram \per \ampere\second \squared}$\\
-\end{tabular}
+\end{tablebox}
 \end{sectionbox}
 \begin{sectionbox}
 	\subsection{Newtonsche Mechanik $\vec F=m \vec a $}
-	\begin{tabular}{ccc} \ctrule
+	\begin{tablebox}{ccc} 
 				& \large Translation & {\large Rotation} (Radius $r$) \\ \cmrule
 		Strecke/Winkel & \large $\vec x$ & \large $\vec \varphi =  \frac{\vec x}{r}$\\[0.2em]
 		Geschwindigkeit & \large $\vec v = \dot{\vec x}$ & \large $\vec \omega = \dot{\vec \varphi} = \frac{\vec v}{r}$ \\[0.2em]
@@ -37,8 +47,8 @@
 		Impuls/Drall & \large $\vec p =m \vec v$ & \large $\vec L = \ma \Theta \vec \omega = \vec r \times \vec p$ \\[0.2em]
 		Kraft/Moment & \large $\vec F = \dot{\vec p} = m \vec a$ &  \large $\vec M = \dot{\vec L} = \ma \Theta \vec \alpha = \vec r \times \vec F$ \\[0.2em]
 		Energie & \large $E_{\ir kin}=\frac12mv^2$ & \large $E_{\ir rot}=\frac12 \Theta \omega ^2$\\[0.2em]
-		Leistung & \large $P = \vec F \bdot \vec v$ & \large $P = \vec M \bdot \vec \omega$\\ \cbrule
-	\end{tabular}
+		Leistung & \large $P = \vec F \bdot \vec v$ & \large $P = \vec M \bdot \vec \omega$\\ 
+	\end{tablebox}
 \end{sectionbox}
 \begin{sectionbox}
 	\subsection{Elektrische Felder}
@@ -73,13 +83,17 @@
 
 
 \end{sectionbox}
+
+\begin{sectionbox}
+Leistungsfaktor: $\cos \varphi = \frac{P}{S}$
+\end{sectionbox}
 \section{Gleichstrommaschine}
 
 \begin{sectionbox}
 
 \subsection*{Elektrisch}
 
-Ankerkreis: $U_a = U_i + R_a I_a + L_a \frac \diff I_a \diff t$ \\
+Ankerkreis: $U_a = U_i + R_a I_a + L_a \frac{\diff I_a}{ \diff t}$ \\
 Erregerkreis: $U_e = R_e I_e + L_e \frac{\diff I_e}{\diff t}$
 
 \subsection*{Mechanisch}
@@ -98,6 +112,7 @@ $\eta = \frac{P_m}{P_e} = \frac{M \omega_m}{U_a I_a + U_e I_e}$
 
 \begin{sectionbox}
 \subsection{Fremderregte Maschine}
+\includegraphics[width=0.6\columnwidth]{GM_F.pdf}
 
 \subsubsection*{Stationärer Betrieb}
 $\omega_m =  \frac{U_a - R_a I_a}{c \Phi} $ \\
@@ -112,6 +127,7 @@ $\omega_m = \frac{U_a}{c \Phi} - \frac{R_a}{(c \Phi)^2} M_{\ir el}  $
 \end{sectionbox}
 \begin{sectionbox}
 \subsection{Nebenschlussmaschine}
+\includegraphics[width=0.6\columnwidth]{GM_N.pdf}
 
 $\Phi = \frac{L_e}{N_e} \cdot I_e = \frac{L_e}{N_e} \cdot \frac{U_a}{R_e + R_V}$
 
@@ -121,6 +137,7 @@ Drehzahlabhänigkeit:\\ $w_m = \frac{N_e (R_e + R_V)}{c \cdot L_e} - \frac{R_a (
 \end{sectionbox}
 \begin{sectionbox}
 \subsection{Seriemaschine}
+\includegraphics[width=0.6\columnwidth]{GM_S.pdf}
 
 $I_e$ = $I_a$ = $I$
 
@@ -159,14 +176,66 @@ Typische Auslegungen der Laufzeiten: Bohrmaschine ($50 \si{\hour}$)
 \end{sectionbox}
 \section{Drehfeldmaschinen}
 
+\begin{sectionbox}
+Rotierendes Feld. Beispiele: Synchronmaschine, Asynchronmaschine
+
+Flussverkettung: $\vec \Psi_{\ir gesamt} = \frac{3}{2} \cdot \hat I \cdot L_{\ir ph} \cdot e^{\j ( \omega t + \varphi_i)}$
+
+$\vec \Psi = \hat I \cdot L_{\ir ph} \cdot e^{\j (\omega t + \varphi_i)}$
+
+Amplitude der Flussverkettungs-Zeiger entspricht der Amplitude der Phasengrößen (zur Normierung). \\
+
+\subsection{Transformation Dreiphasen $\ra$ Drehzeiger}
+
+$\vec x(t) = \frac{2}{3} \cdot \left[ x_a (t) + x_b (t) \cdot \e^{\j 120 \si{\degree}} + x_c (t) \cdot \e^{- \j 120 \si{\degree} } \right]$
+
+mit
+$e^{\j 120 \si{\degree}} = - \frac{1}{2} + \j \cdot \frac{\sqrt{3}}{2} $
+\quad $e^{- \j 120 \si{\degree}} = - \frac{1}{2} - \j \cdot \frac{\sqrt{3}}{2} $ \\
+
+In der komplexen Ebene: $\vec x (t)  = x_\alpha + \j x_\beta$
+
+$x_\alpha  = \frac{1}{3} ( 2 x_a - x_b - x_c)$
+
+$x_\beta = \frac{1}{\sqrt{3}} (x_b - x_c)$
+
+Nullsystem (gleichphasige Komponenten):
+
+$x_0 (t) = \frac{1}{3} \cdot \left[ x_a + x_b + x_c \right]$
+
+\subsection{Drehzeiger $\ra$ (ruhende) Zeiger}
+
+$\vec X(t) = \vec x (t) \cdot \e^{- \j \int \omega_K \diff t}$
+
+Für konstante $\omega_K$ (Umlaufgeschwindigkeit des KS): $\vec X(t) = \vec x(t) \cdot \e^{- \j \omega_K t}$
+
+\subsection{Zeiger $\ra$ Drehzeiger}
+
+$\vec x(t) = \vec X (t) \cdot \e^{\j \omega_K t}$ 
+
+\subsection{Drehzeiger $\ra$ Phasengrössen}
+$x_a = x_\alpha + x_0$
+
+$x_b = \frac{1}{2} ( \sqrt 3 x_\beta - x_\alpha ) + x_0$
+
+$x_c = \frac{1}{2} (- \sqrt 3 x_\beta - x_\alpha ) + x_0$ 
+
+\end{sectionbox}
 
 \section{Synchronmaschine}
 
 \begin{sectionbox}
+Stator: Dreiphasige Wicklung
 
-Polpaarzahl: $\omega_{\ir mech} = \frac{\omega_1}{p}$ \quad $M = p \cdot M_{p}$ 
+Rotor: Rotorwicklung (mit Gleichstrom über Schleifring) oder Permanentmagnet\\
 
-mit $M_p$: Drehmoment pro Polpaar
+\emph{Formeln gelten für Phasengrössen (Strom und Spannung)} \\
+
+Polpaarzahl: $\omega_{\ir mech} = \omega_{D1} = \frac{\omega_1}{p}$ \quad $M = p \cdot M_{p}$ 
+
+mit $M_p$: Drehmoment pro Polpaar 
+
+$\Ra$ Leistung unabhängig von der Polpaarzahl\\
 
 Polradspannung $\vec U_p = \j \omega_1 \vec \Psi_p$: \\
 
@@ -176,6 +245,9 @@ Polradspannung $\vec U_p = \j \omega_1 \vec \Psi_p$: \\
  $\vec U_1 = \vec U_p + \Delta \vec U$
  $\Delta \vec U = \j X_d \cdot \vec I_1 (+ R \cdot \vec I_1)$ \\
 
+Polradwinkel $\theta$: Winkel zwischen Stator $\vec U$ und Polradspannung $\vec U_p$:
+
+$\theta > 0 \ra$ motorischer Betrieb, $\theta < 0 $ generatorischer Betrieb \\
 
 
 Leistung:
@@ -187,7 +259,14 @@ Leistung:
  $U_{1q} = \abs{\vec U_1} \cos \theta$
 
  $U_{1d} = - \abs{\vec U_1} \sin \theta$
+
+ \end{sectionbox}
+
+\begin{sectionbox}
 \subsection{Schenkelpolmaschine}
+kurzer Rotor, grosser Druchmesser; Stator geblecht, Rotor aus Eisen
+
+\includegraphics[width=0.7\columnwidth]{SM_SP.pdf}
 
 Statorspannung:
 
@@ -205,8 +284,16 @@ Leistung:
 Moment: 
 
 $M = \frac{3 U_1 U_P}{\omega_{\ir mech} X_d} \sin (\theta ) + \frac{3 U_1^2}{2 \omega_{\ir mech}} (\frac{1}{X_q} - \frac{1}{X_d} ) \sin ( 2 \theta )$
+\end{sectionbox}
 
+\begin{sectionbox}
  \subsection{Vollpolmaschine}
+
+ langer Rotor, kleiner Durchmesser; 
+für schnelllaufende Maschinen, Turbogenerator
+
+\includegraphics[width=0.5\columnwidth]{SM_VP.pdf}
+
 
 Statorspannung:
 $\vec U_1 = \vec I_1 (R_1 + \j \omega_1 L_d) + \j U_P$
@@ -217,8 +304,21 @@ Leistung:
 Moment: 
 $M = \frac{3 U_1 U_P}{\omega_{\ir mech} X_d} \sin ( \theta ) $
 \end{sectionbox}
+
+\begin{sectionbox}
+\subsection{SM am Netz} 
+Zeigerlängen entsprechen den Effektivwerten der Phasengrößen! \\
+
+\includegraphics[width=\columnwidth]{SM_RZ.pdf}
+
+\end{sectionbox}
 \begin{sectionbox}
 \subsection{Raumzeigerdarstellung}
+Zeigerlängen entsprechen den Amplituden der Phasengrößen! \\
+
+\includegraphics[width=0.4\columnwidth]{SM_RZ2.pdf}
+
+In Verbraucherzählpfeilsystem: \\ \\
 Statorspannung:\\
 $U_d = R_1 I_d + \frac{\diff \Psi_d}{\diff t} - p \omega_{\ir mech} \Psi_q$\\
 $U_q = R_1 I_q + \frac{\diff \Psi_q}{\diff t} + p \omega_{\ir mech} \Psi_d$
@@ -270,19 +370,133 @@ $\omega_{\ir mech} = \frac{1}{J} \int (M- M_{\ir Last}) \diff t$
   (2,0) to[open, v=$U_{h1} $] (2,-3)
    (4.3,0) to[open, v^=$U'_{h2}$] (4.3,-3);
  \end{circuitikz}
- Drehfeld der Satorwicklung: $\omega_{D1} = \frac{\omega_{1}}{p}$
+\begin{symbolbox}
+\begin{tabular}{rl}
+$\omega_{D1}$ & Frequenz des Statordrehfeldes \\
+$\omega_1$ & Statorfrequenz \\
+$\omega_{D2}$ & Frequenz des Rotordrehfeldes (relative Rotorfrequenz)\\
+$\omega_2$ & Rotorfrequenz \\
+$\omega_{\ir mech}$ & mech. Drehkreisfrequenz \\ 
+\end{tabular}
+\end{symbolbox}
+
+ Statordrehfeld: $\omega_{D1} = \frac{\omega_{1}}{p}$ 
 
  Drehfeld des Rotors: $\omega_{D2} = \omega_{D1} - \omega_{\ir mech}$
 
 $\omega_2 = p \cdot \omega_{D2}$
 
-Schlupf: $s = \frac{n_{\ir syn} - n}{n_{\ir syn}} = \frac{\omega_1 - p \cdot \omega_{\ir mech}}{\omega_1} = \frac{\omega_2}{\omega_1}$ 
+$\omega_2 = \omega_1 - p \cdot \omega_{\ir mech}$ \\
+
+Schlupf
+
+$s = \frac{n_{\ir syn} - n}{n_{\ir syn}} = \frac{\omega_1 - p \cdot \omega_{\ir mech}}{\omega_1} = \frac{\omega_2}{\omega_1}$ 
+
+$\omega_2 = s \cdot \omega_1$
+
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Spezialfälle}
+
+\includegraphics[width=0.9\columnwidth]{ASM_Betrieb.pdf}
+
+\subsection{Stillstand}
+
+$n = 0$
+\quad $s = 1$
+\quad
+$\omega_2 = \omega_1$
+\quad
+$U_{h2} = \frac{U_{h1}}{\text{ü}}$ 
+
+\subsection{Synchrondrehzahl}
+
+
+$n = n_{\ir syn}$
+\quad $s = 0$
+\quad
+$\omega_2 = 0$
+\quad
+$U_{h2} = 0$ 
 
  \subsection{Leerlauf}
   $\omega_{D2} = 0 \ra \omega_{\ir mech} = \omega_{\ir syn} = \omega_{D1} = \omega_1 /p $ 
 
   Im Leerlauf ist der Schlupf 0 $s = 0$
 
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Leistungen}
+
+Rotorleistung: $P_2 = 3 \cdot U_{h2} \cdot I_2$
+
+Statorleistung: $P_1 = P_\delta = 3 \cdot U_{h1} \cdot I_1$
+
+Luftspaltleistung: $P_\delta = P_1 - 3 \cdot R_1 \cdot I_1^2 - P_{\ir Fe}$ 
+
+$P_2 = s \cdot P_\delta$ \quad $P_\delta = P_2 + P_{\ir mech}$
+
+\end{sectionbox}
+\begin{sectionbox}
+\subsection{Wirkungsgrad}
+Motorbetrieb: $\eta = \frac{P_{\ir mech}}{P_1} < \frac{P_{\ir mech}}{P_\delta} = 1 - s$ \quad $0 < s < 1$
+
+Generatorbetrieb: $\eta = \frac{P_1}{P_{\ir mech}} <\frac{P_\delta}{P_{\ir mech}} = \frac{1}{1 -s }$ \quad $s < 0$
+\end{sectionbox}
+
+
+\begin{sectionbox}
+\subsection{Läuferwiderstand $R_S$}
+
+$R_2 + R_S = \frac{R_2}{s}$
+
+$R_S = R_2 \cdot \frac{1 - s}{s}$ 
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsection{Drehmoment}
+
+$M_{\ir el} = \frac{P_{\ir mech}}{\omega_{\ir mech}} = \frac{P_\delta}{\omega_{D1}} = \frac{P_\delta \cdot p}{\omega_1} = \frac{3 p }{\omega_1} \cdot \frac{U_{h20}^2}{\left(\frac{R_2}{s}\right)^2 + (\omega_1 L_{2 \sigma})^2} \cdot \frac{R_2}{s}$
+
+Linearer Bereich: $M_{\ir el} = \frac{3 \cdot p}{\omega_1} \cdot \frac{U_1^2}{R_2'} \cdot s$
+
+Kippschlupf: $s_k = \frac{R_2'}{\sqrt{R_1^2 + (\omega_1 L_{1 \sigma} + \omega_1 L_{2 \sigma}')^2}}$
+
+Kippmoment: $M_k = \frac{3p}{2 \omega_1} \cdot \frac{U_1^2}{(R_1 + \omega_1 L_{1 \sigma + \omega_1 L_{2 \sigma}'})}$
+
+Kloss'sche Gleichung: $\frac{M_{\ir el}}{M_k} = \frac{2}{\frac{s}{s_k} + \frac{s_k}{s}}$
+\end{sectionbox}
+
+\begin{sectionbox}
+\subsection{Stillstehendes Koordinatensystem}
+
+Statorspannungsgleichung:
+
+$\vec u_1 = R_1 \vec i_1 + \frac{\diff \vec \Psi_1}{\diff t}$ 
+
+Rotorspannungsgleichung: 
+
+$\vec u_2 = R_2 \vec i_2 + \frac{\diff \vec \Psi_2}{\diff t}  \j p \omega_{\ir mech} \vec \Psi_2$
+
+Flussverkettungen: 
+
+$\vec \Psi_1 = L_1 \vec i_1 + L_h \vec i_2$
+
+$\vec \Psi_2  = L_2 \vec i_2 + L_h \vec i_1$
+
+
+Drehmoment:
+
+$M = \frac{3p}{2} \Im{\vec \Psi_1^* \vec i_1} = \frac{3p}{2} \frac{L_h}{L_2} \Im{\vec \Psi_2^* \vec i_1} = $ \\ $ = \frac{3p}{2} \frac{L_h}{L_1} \Im{\vec \Psi_1^* \vec i_2} $ 
+
+Mechanische Drehzahl: 
+
+$\omega_{\ir mech} = \frac{1}{J} \int (M - M_{\ir Last}) \diff t$ \\
+
+Flussverkettung (allg.): $\Psi = L \cdot i = N \cdot \Phi$
+\end{sectionbox}
+
+\begin{sectionbox}
   \subsection{Rotierendes Koordinatensystem}
 
 Statorspannungsgleichung:
@@ -307,6 +521,9 @@ Drehmoment:
   $M = \frac{3 p}{2} \Im{\vec \Psi_1^* \vec i_1} = \frac{3p}{2} \frac{L_h}{L_2} \Im{\vec \Psi_1^* \vec i_1}$ \\$ =  \frac{3p}{2} \frac{L_h}{L_1} \Im{\vec \Psi_1^* \vec i_2} $
 
   $\omega_{\ir mech} = \frac{1}{J} \int (M - M_{\ir Last}) \diff t$
+
+$R_S = R_2 \cdot \frac{1 -s }{s}$
+
  \end{sectionbox}
 
  \section{Umrichter}
