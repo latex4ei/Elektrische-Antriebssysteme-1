@@ -359,7 +359,7 @@ $\omega_{\ir mech} = \frac{1}{J} \int (M- M_{\ir Last}) \diff t$
 \label{sec:async}
  \begin{sectionbox}
 \ctikzset{bipoles/length=3em}
- \begin{circuitikz}[scale = 0.8] \draw
+ \begin{circuitikz}[scale = 0.7] \draw
  (0,0) to[short, o-, i=$I_1$] (1,0) to[R, l=$R_1$] (2,0) to [L, l=$L_{\sigma 1}$] (3,0) -- (3,0)
  (3,0) to[L, l=$L'_{\sigma2}$] (4,0) to[R, l=$R'_2$] (5,0) to[R, l=$R'_S$] (6,0) to[short, i<=$I'_2$, , -o] (7,0 )
  (3,0) -- (3, -0.6) -- (2.5, -0.6) to[L, l=$L_h$] (2.5, -2.3) --  (3, -2.3)
@@ -384,15 +384,12 @@ $\omega_{\ir mech}$ & mech. Drehkreisfrequenz \\
 
  Drehfeld des Rotors: $\omega_{D2} = \omega_{D1} - \omega_{\ir mech}$
 
-$\omega_2 = p \cdot \omega_{D2}$
-
-$\omega_2 = \omega_1 - p \cdot \omega_{\ir mech}$ \\
+$\omega_2 = p \cdot \omega_{D2} = \omega_1 - p \cdot \omega_{\ir mech}$ \\
 
 Schlupf
 
 $s = \frac{n_{\ir syn} - n}{n_{\ir syn}} = \frac{\omega_1 - p \cdot \omega_{\ir mech}}{\omega_1} = \frac{\omega_2}{\omega_1}$ 
-
-$\omega_2 = s \cdot \omega_1$
+\qquad \qquad $\omega_2 = s \cdot \omega_1$
 
 \end{sectionbox}
 \begin{sectionbox}
@@ -644,10 +641,10 @@ Dotierung mit Akzeptoren (Löchern) $\Ra$ Löcherleitung \\
 
 Absenkung des Ferminiveaus $\Ra$ mehr Ladungsträger im Valenzband
 
-Dichte der freien Elektronen: $p_{p0} = n_{p0} + N_A^-$ \\
+Dichte der freien Löcher: $p_{p0} = n_{p0} + N_A^-$ \\
 mit $n_{p0}$ verursacht durch Eigenleitung \\
 
-Dichte der freien Löcher: $n_{p0} \approx \frac{n_i^2}{N_A^-}$
+Dichte der freien Elektronen: $n_{p0} \approx \frac{n_i^2}{N_A^-}$
 
 Elektrische Leitfähigkeit: $\sigma = e_0 \cdot N_A^- \cdot \mu_p$
 
@@ -666,13 +663,30 @@ $D_n = \mu_n \frac{k \cdot T}{\epsilon_0}$ \quad $D_p = \mu_p \frac{k \cdot T}{\
 Poissongleichung: \\
  $\frac{\diff^2 V}{\diff x^2} = - \frac{\diff E}{\diff x} = - \frac{\rho}{\epsilon} = \frac{e_0}{\epsilon} \cdot \left[ n(x) - p(x)  N_D^+ (x) + N_A^- (x) \right]$
 
+Raumladungsdichte: $\rho \approx N_{D/A} \cdot e_0$
+
+\includegraphics[width=0.5\columnwidth]{R_Diode.pdf}
+
+
+ Elektrische Feldstärke: $E(x) = - \int \frac{\rho (x)}{\epsilon} \diff x$
+
+\includegraphics[width=0.5\columnwidth]{V_Diode.pdf}
+
+ Spannung / Potential: $V(x) = - \int E(x) \diff x$
+
+\includegraphics[width=0.5\columnwidth]{E_Diode.pdf}
+
  Stromdichte-Gleichgewicht: \\
  $i_p (x) = e_0 \cdot \mu_p \cdot p \cdot E - \epsilon_0 \cdot D_p \cdot \frac{\diff p}{\diff x}$ \\
   $i_n (x) = e_0 \cdot \mu_n \cdot n \cdot E - \epsilon_0 \cdot D_n \cdot \frac{\diff n}{\diff x}$
+
+  siehe auch Skript S. 15
 \end{sectionbox}
 
 \begin{sectionbox}
 \subsection{Technologiekurve}
+
+Ein Halbleiter hat für eine bestimmte Siliziumdicke eine Technologiekurve. Durch Bestrahlung ($e^-$, $p^+$) kann der Arbeitspunkt gewählt werden zum Beispiel optimiert auf geringe Durchlass oder Schaltverluste.
 \end{sectionbox}
 
 \section{Leistungshalbleiter}
@@ -760,11 +774,11 @@ Schaltsymbol: \\
 
 
 \subsubsection*{Aufbau}
-\includegraphics[width=\columnwidth]{IGBT.pdf}
+\includegraphics[width=0.8\columnwidth]{IGBT.pdf}
 \end{sectionbox}
 \begin{sectionbox}
 \subsubsection*{Ansteuerung}
-\includegraphics[width=\columnwidth]{IGBT_Ansteuer.pdf}
+\includegraphics[width=0.8\columnwidth]{IGBT_Ansteuer.pdf}
 
 
 Zusätzlich:
