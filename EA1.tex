@@ -470,7 +470,6 @@ Kloss'sche Gleichung: $\frac{M_{\ir el}}{M_k} = \frac{2}{\frac{s}{s_k} + \frac{s
 \begin{sectionbox}
 \subsection{Stillstehendes Koordinatensystem}
 
-\includegraphics[width=0.6\columnwidth]{ASM_Zeigerdiagramm.pdf}
 
 
 Statorspannungsgleichung:
@@ -479,7 +478,7 @@ $\vec u_1 = R_1 \vec i_1 + \frac{\diff \vec \Psi_1}{\diff t}$
 
 Rotorspannungsgleichung: 
 
-$\vec u_2 = R_2 \vec i_2 + \frac{\diff \vec \Psi_2}{\diff t}  \j p \omega_{\ir mech} \vec \Psi_2$
+$\vec u_2 = R_2 \vec i_2 + \frac{\diff \vec \Psi_2}{\diff t}  - \j p \omega_{\ir mech} \vec \Psi_2$
 
 Flussverkettungen: 
 
@@ -490,7 +489,10 @@ $\vec \Psi_2  = L_2 \vec i_2 + L_h \vec i_1$
 
 Drehmoment:
 
-$M = \frac{3p}{2} \Im{\vec \Psi_1^* \vec i_1} = \frac{3p}{2} \frac{L_h}{L_2} \Im{\vec \Psi_2^* \vec i_1} = $ \\ $ = \frac{3p}{2} \frac{L_h}{L_1} \Im{\vec \Psi_1^* \vec i_2} $ 
+$M = \frac{3p}{2} \Im{\vec \Psi_1^* \vec i_1} = \frac{3p}{2} \frac{L_h}{L_2} \Im{\vec \Psi_2^* \vec i_1} = $ \\ $ = \frac{3p}{2} \frac{L_h}{L_1} \Im{\vec \Psi_1^* \vec i_2} = \frac{3p}{2} \cdot \frac{L_m}{\sigma L_1 L_2} \cdot \Im{\vec \Psi_2^* \cdot \vec \Psi_1}$ 
+
+mit Streukoeffizient: $\sigma = 1 - \frac{L_m^2}{L_1 L_2}$
+
 
 Mechanische Drehzahl: 
 
@@ -501,6 +503,9 @@ Flussverkettung (allg.): $\Psi = L \cdot i = N \cdot \Phi$
 
 \begin{sectionbox}
   \subsection{Rotierendes Koordinatensystem}
+
+\includegraphics[width=0.6\columnwidth]{ASM_Zeigerdiagramm.pdf}
+
 
 Statorspannungsgleichung:
 
@@ -970,11 +975,17 @@ Maximaler Phasenwinkel: $\varphi_{\ir max} = \arctan (\sqrt{ k_{12}}) - \arctan 
 \section{Modellierung der Asynchronmaschine}
 
 \begin{sectionbox}
-Gleichungen der Asynchronmaschine siehe Kapitel \ref{sec:async}.
+Gleichungen der Asynchronmaschine siehe Kapitel \ref{sec:async} nun dargestellt in per-unit (p.u.).
 
-Streukoeffizient: $\sigma = 1 - \frac{L_m^2}{L_1 L_2}$
+Koordinatensysteme:
+
+\begin{itemize}
+	\item Stillstehend: $f^K = 0$
+	\item Rotorflussorientiert: $f^K = f^R$
+	\item Statorflussorientiert: $f^K = f^S$
+	\item Rotorfest: $f^K = n$
+\end{itemize}
 \end{sectionbox}
-
 \begin{sectionbox}
 \subsection{Bezugsgrössen}
 
@@ -1005,39 +1016,80 @@ $x_{\ir p.u.} = \frac{X_{S1}}{X_N}$
 
 
 \begin{sectionbox}
-\subsection{Statorfestes Koordinatensystem}
+\subsection{Statorfestes (stillst.) Koordinatensystem $f^K = 0$}
+
+Reelle Achse in Richtung der Phase a. \\
+
+Für den Kurzschlussläufer gilt: $\vec u_2^0 = 0$ \\
 
 $\vec u_1^0 = r_1 \vec i_1^0 + \frac{1}{\omega_N} \cdot \frac{\diff \vec \Psi_1^0}{\diff t}$
 
-$\vec u_2^0 = 0 = r_2 \vec i_2^0 + \frac{1}{\omega_N} \cdot \frac{\diff \vec \Psi_2^0}{\diff t} - \j n \vec \Psi_2^0$
+$\vec u_2^0 = 0 = r_2 \vec i_2^0 + \frac{1}{\omega_N} \cdot \frac{\diff \vec \Psi_2^0}{\diff t} - \j n \vec \Psi_2^0$ \\
 
-Da $r_2 \vec i_2^0$ klein:
+\subsubsection*{Rotorflussdynamik}
+
+Da $r_2 \vec i_2^0$ klein gilt:
 
 $\frac{\diff \vec \Psi_2^0}{\diff t} = \j n \omega_N \cdot \vec \Psi_2^0 \Ra \vec \Psi_2^0 = \vec{\hat \Psi_2^0} \cdot \e^{\j n \omega_N t}$
+
+\subsubsection*{Beziehung zwischen Stator- und Rotorflussdynamik}
 
 $\vec i_2 = \frac{1}{x_m} (\vec \Psi_1 - x_1 \vec i_1)$
 
 $\vec \Psi_2 = \frac{x_2}{x_m} (\vec \Psi_1 - \sigma x_1 \vec i_1)$ mit $\sigma = 1 - \frac{x_m^2}{x_1 x_2}$
 
+\includegraphics[width=0.7\columnwidth]{ASM_Zeiger2.pdf}
+
+
+
 \end{sectionbox}
 \begin{sectionbox}
-\subsection{Rotorflussorientiertes Koordinatensystem}
+\subsection{Rotorflussorientiertes Koordinatensystem $f^K = f^R$}
 
+
+Spannungsgleichung:
 $\vec u_2^R = 0 = r_2 \vec i_2^R + \frac{1}{\omega_N} \cdot \frac{\diff \Psi_2^R}{\diff t} + \j (f_1^R - n) \vec \Psi_2^R$
 
-$\vec i_2 = \frac{1}{x_2} (\vec \Psi_2 - x_m \vec i_1)$
+Rotorstrom:
+$\vec i_2 = \frac{1}{x_2} (\vec \Psi_2 - x_m \vec i_1)$ \\
 
-$\frac{\diff \vec \Psi_2^R}{\diff t} = (- \frac{1}{T_2} - \j f_2^R \omega_N) \cdot \vec \Psi_2^R + \frac{1}{T_2} x_m \vec i_1^R$ 
+Rotorflussdynamik:
+$\frac{\diff \vec \Psi_2^R}{\diff t} = (- \frac{1}{T_2} - \j f_2^R \omega_N) \cdot \vec \Psi_2^R + \frac{1}{T_2} x_m \vec i_1^R$
 
-Rotorzeitkonstante: $T_2 = \frac{L_2}{R_2} = \frac{x_2}{\omega_N r_2}$
+mit Rotorzeitkonstante: $T_2 = \frac{L_2}{R_2} = \frac{x_2}{\omega_N r_2}$
 
-Rotorfrequenz (Schlupffrequenz): $f_2^R = f_1^R - n$
+und Rotorfrequenz (Schlupffrequenz): $f_2^R = f_1^R - n$ \\
 
 Da $d$-Achse in Richtung des Rotorflusszeigers $\vec \Psi_2$ orientiert:
+$\vec \Psi_2^R = \Psi_{2d}^R = \Psi_2$ \\
 
-$\vec \Psi_2^R = \Psi_{2d}^R = \Psi_2$
+Realteil:
+$\frac{\diff \Psi_2}{\diff t} = - \frac{1}{T_2} \Psi_2 + \frac{1}{T_2} \cdot x_m i_{1d}^R$
 
-$\Ra \frac{\diff \Psi_2}{\diff t} = - \frac{1}{T_2} \Psi_2 + \frac{1}{T_2} \cdot x_m i_{1d}^R$
+$\Ra \Psi_2(s) = \frac{x_m}{1 + s T_2} \cdot i_{1d}^R (s)$ (VZ1-Glied / Tiefpass) \\ 
+
+Imaginärteil: 
+$\vec \Psi_{2q}^R = 0 = - f_2^R \omega_N \Psi_2 + \frac{1}{T_2} x_m i_{1q}^R$
+
+ $ \Ra f_2^R = \frac{r_2 x_m}{x_2} \cdot \frac{i_{1q}^R}{\Psi_2}$
+
+ Drehmoment: $m_e = \frac{x_m}{x_2} \Psi_2 i_{1q}^R$
+
+ Rotorfrequenz: $f_2^R = r_2 \cdot \frac{m_e}{\abs{\Psi_2}^2}$
+
+Störme:
+
+ $\frac{\sigma x_1}{\omega_N} \cdot \frac{\diff i_{1d}^R}{\diff t} = - r_e i_{1d}^R + u_{1d}^R + \sigma x_1 f_1^R i_{1q}^R + \frac{1}{\omega_N T_2} \cdot \frac{x_m}{x_2} \Psi_2$
+
+  $\frac{\sigma x_1}{\omega_N} \cdot \frac{\diff i_{1q}^R}{\diff t} = - r_e i_{1q}^R + u_{1q}^R + \sigma x_1 f_1^R i_{1d}^R - n \cdot \frac{x_m}{x_2} \Psi_2$
+
+  mit $r_e = r_1 + \frac{x_m^2}{x_2^2} r_2$
+
+  Gesamtstreuung: $L_\sigma = \sigma \cdot L_1$
+
+Nennwert des Rotorflusses: \\
+$\vec \Psi_2 = (\vec \Psi_1 - L_1 \sigma \vec I_1) \frac{L_2}{L_m} = \frac{\vec U_1}{\j \omega_N} - L_1 \sigma \vec I_1$ mit $\vec I_1 = I_{1 \ir nom} \e^{-\j \phi}$
+
 \end{sectionbox}
 
 
@@ -1183,6 +1235,8 @@ $\ra $ Regelung des Drehmoments durch den Winkel des Statorflusszeigers.
 $\vec u_1^0 = r_1 \vec i_1^0 + \frac{1}{\omega_N} \cdot \frac{\diff \vec \Psi_1^0}{\diff t}$
 
 $\vec \Psi_2 = \frac{x_2}{x_m} (\vec \Psi_1 - \sigma x_1 \vec i_1 )$
+
+Nachteil: Nicht für kleine Drehzahlen geeignet
 \end{sectionbox}
 
 \begin{sectionbox}
@@ -1190,5 +1244,7 @@ $\vec \Psi_2 = \frac{x_2}{x_m} (\vec \Psi_1 - \sigma x_1 \vec i_1 )$
 
 Im rotorfesten Koordinatensystem: 
 $\frac{\diff \vec \Psi_2^L}{\diff t} = - \frac{1}{T_2} \vec \Psi_2^L + \frac{1}{T_2} x_m \vec i_1^L$
+
+Nachteil: Benötigt Rotorflusswinkel
 \end{sectionbox}
 \end{document}
